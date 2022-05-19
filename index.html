@@ -39,14 +39,14 @@
     <script>
       Kakao.init('d45c308103022ea72471fe777b20b66c');
       function kakaoLogin() {
-        if (Kakao.Auth.getAccessToken()) {
-          console.log(Kakao.Auth.getAccessToken())
-        } else {
-          Kakao.Auth.login({
-            success: auth => console.log({auth}),
-            fail: error => console.log({err})
-          })
-        }
+        // if (Kakao.Auth.getAccessToken()) {
+        //   console.log(Kakao.Auth.getAccessToken())
+        // } else {
+        // }
+        Kakao.Auth.login({
+          success: auth => console.log({auth}),
+          fail: error => console.log({err})
+        });
       }
       function kakaoLogout() {
         Kakao.Auth.login(() => console.log(Kakao.Auth.getAccessToken()))
