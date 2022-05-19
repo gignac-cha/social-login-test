@@ -3,10 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <title>Social Login Test</title>
+
+    <!-- Google -->
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="784707615791-9qvlv26kv51vma6qclohk84uu06bn1bu.apps.googleusercontent.com">
+
+    <!-- Kakao -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   </head>
   <body>
+    <!-- Google -->
     <div class="g-signin2" data-onsuccess="onSignIn"></div>
     <script>
       function onSignIn(googleUser) {
@@ -24,6 +30,26 @@
         auth2.signOut().then(function () {
           console.log('User signed out.');
         });
+      }
+    </script>
+
+    <!-- Kakao -->
+    <button onclick="kakaoLogin()">카카오 로그인</button>
+    <button onclick="kakaoLogout()">카카오 로그아웃</button>
+    <script>
+      Kakao.init('d45c308103022ea72471fe777b20b66c');
+      function kakaoLogin() {
+        if (Kakao.Auth.getAccessToken()) {
+          console.log(Kakao.Auth.getAccessToken())
+        } else {
+          Kakao.Auth.login({
+            success: auth => console.log({auth}),
+            fail: error => console.log({err})
+          })
+        }
+      }
+      function kakaoLogout() {
+        Kakao.Auth.login(() => console.log(Kakao.Auth.getAccessToken()))
       }
     </script>
   </body>
