@@ -8,6 +8,9 @@
     <script src="https://apis.google.com/js/platform.js" async defer></script>
     <meta name="google-signin-client_id" content="784707615791-9qvlv26kv51vma6qclohk84uu06bn1bu.apps.googleusercontent.com">
 
+    <!-- Naver -->
+    <script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js"></script>
+
     <!-- Kakao -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
   </head>
@@ -30,6 +33,36 @@
         auth2.signOut().then(function () {
           console.log('User signed out.');
         });
+      }
+    </script>
+
+    <!-- Naver -->
+    <button id="naverIdLogin_loginButton">네이버 로그인</button>
+    <button onclick="naverLogout">네이버 로그아웃</button>
+    <script>
+      const naverLogin = new naver.LoginWithNaverId(
+        {
+          clientId: "ja1kiZvmTvy0JvQZr1ix",
+          callbackUrl: "https://" + window.location.hostname + ((location.port==""||location.port==undefined)?"":":" + location.port) + "/oauth/sample/callback.html",
+          isPopup: true,
+          loginButton: {color: "green", type: 3, height: 60}
+        }
+      );
+      naverLogin.init();
+      console.log(naverLogin.generateAuthorizeUrl())
+      
+      window.addEventListener('load', function () {
+        naverLogin.getLoginStatus(function (status) {
+          if (status) {
+            console.log({naverLogin})
+            console.log(naverLogin.user.getProfileImage())
+            console.log(naverLogin.user.getNickName())
+          }
+        });
+      });
+
+      function naverLogout() {
+        naverLogin.logout();
       }
     </script>
 
